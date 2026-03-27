@@ -1,0 +1,138 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Research Session (Local)",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/setup-tmux.sh",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "group": "none",
+      "detail": "Start tmux session with Claude Code in local environment"
+    },
+    {
+      "label": "Start Research Session (Docker)",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/setup-tmux.sh --docker",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "group": "none",
+      "detail": "Start tmux session with Claude Code in Docker container"
+    },
+    {
+      "label": "Attach to Research Session",
+      "type": "shell",
+      "command": "tmux attach-session -t research || echo 'No session found. Use Start Research Session first.'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "group": "none",
+      "detail": "Attach to existing tmux research session"
+    },
+    {
+      "label": "Stop Research Session",
+      "type": "shell",
+      "command": "tmux kill-session -t research 2>/dev/null && echo 'Session stopped.' || echo 'No session running.'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "group": "none",
+      "detail": "Stop the tmux research session"
+    },
+    {
+      "label": "Docker: Start Container",
+      "type": "shell",
+      "command": "docker compose -f .devcontainer/docker-compose.yml up -d",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "Start the research Docker container"
+    },
+    {
+      "label": "Docker: Stop Container",
+      "type": "shell",
+      "command": "docker compose -f .devcontainer/docker-compose.yml down",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "Stop the research Docker container"
+    },
+    {
+      "label": "Docker: Shell",
+      "type": "shell",
+      "command": "docker exec -it research-dev fish",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "Open a shell in the research container"
+    },
+    {
+      "label": "Setup: Local Environment",
+      "type": "shell",
+      "command": "make setup",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "Setup local Python environment with uv"
+    },
+    {
+      "label": "Run: Experiment",
+      "type": "shell",
+      "command": "make run",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "Run the main experiment"
+    },
+    {
+      "label": "Check: All",
+      "type": "shell",
+      "command": "make check",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "Run all code quality checks"
+    }
+  ]
+}

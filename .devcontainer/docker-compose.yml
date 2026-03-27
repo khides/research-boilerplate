@@ -1,0 +1,33 @@
+services:
+  research:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    container_name: research-dev
+    hostname: research-dev
+    volumes:
+      - ..:/workspace:cached
+      - venv:/workspace/.venv
+      - node_modules:/workspace/node_modules
+      # SSH and git config (read-only)
+      - ~/.ssh:/root/.ssh:ro
+      - ~/.gitconfig:/root/.gitconfig:ro
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - ANTHROPIC_API_KEY
+    # Run setup on container start, then keep running
+    entrypoint: ["/bin/bash", "-c", "bash /workspace/.devcontainer/setup.sh && exec fish"]
+    stdin_open: true
+    tty: true
+    working_dir: /workspace
+    healthcheck:
+      test: ["CMD", "test", "-f", "/tmp/.setup_done"]
+      interval: 3s
+      timeout: 1s
+      retries: 200
+      start_period: 10s
+
+volumes:
+  venv:
+  node_modules:

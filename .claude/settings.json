@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(sudo :*)"
+    ],
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(jq:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(uv:*)",
+      "Bash(ruff:*)",
+      "Bash(black:*)",
+      "Bash(mypy:*)",
+      "Bash(pytest:*)",
+      "Bash(make:*)",
+      "WebSearch",
+      "WebFetch"
+    ]
+  },
+  "env": {
+    "PROJECT_NAME": "research-project",
+    "PROJECT_TYPE": "research"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c '\"$(git rev-parse --show-toplevel)/.claude/hooks/ralph-session-start.sh\"'"
+          }
+        ]
+      }
+    ]
+  }
+}

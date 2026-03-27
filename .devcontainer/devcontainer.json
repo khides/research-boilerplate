@@ -1,0 +1,22 @@
+{
+  "name": "Research Project",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "research",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": ".venv/bin/python",
+        "terminal.integrated.defaultProfile.linux": "fish"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "charliermarsh.ruff",
+        "xyz.local-history"
+      ]
+    }
+  }
+}

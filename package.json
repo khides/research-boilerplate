@@ -1,0 +1,12 @@
+{
+  "name": "research-project",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Research project with Claude Code + Ralph integration",
+  "dependencies": {
+    "@anthropic-ai/claude-code": "latest"
+  },
+  "scripts": {
+    "setup-tmux": "bash scripts/setup-tmux.sh"
+  }
+}

@@ -1,0 +1,16 @@
+# Research project configuration
+# Customize experiment parameters here
+
+experiment:
+  name: "default"
+  seed: 42
+  output_dir: "out"
+
+training:
+  epochs: 100
+  batch_size: 32
+  learning_rate: 0.001
+
+data:
+  input_dir: "data"
+  split_ratio: [0.8, 0.1, 0.1]

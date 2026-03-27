@@ -1,0 +1,18 @@
+{
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "local-history.enabled": true,
+  "local-history.daysLimit": 30,
+  "local-history.maxDisplay": 10,
+  "local-history.saveDelay": 10,
+  "local-history.path": "${workspaceFolder}/.history",
+  "local-history.exclude": [
+    "**/.history/**",
+    "**/node_modules/**",
+    "**/.venv/**",
+    "**/tmp/**",
+    "**/out/**",
+    "**/__pycache__/**",
+    "**/*.pyc"
+  ],
+  "local-history.treeLocation": "explorer"
+}
