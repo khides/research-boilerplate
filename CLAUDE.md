@@ -18,33 +18,57 @@ This file provides guidance to Claude Code when working with this research proje
 ## Project Structure
 
 ```
-src/           - Main source code
-scripts/       - Standalone utility scripts
-docs/          - Documentation
-config.yaml    - Experiment configuration
-out/           - Generated output (gitignored)
-tmp/           - Temporary files (gitignored)
+.claude/
+  hooks/                      # Ralph hooks (session-start, stop, backpressure)
+  skills/                     # Ralph skills (ralph, ralph-plan, ralph-cancel)
+  settings.json               # Claude Code permissions and hooks
+.devcontainer/                # Docker development environment
+  Dockerfile                  # Python 3.11 + uv + Node.js + tmux
+  devcontainer.json           # Dev container metadata
+  docker-compose.yml          # Container configuration
+  setup.sh                    # Container initialization (dependency caching)
+.vscode/
+  tasks.json                  # VSCode task definitions
+  settings.json               # VSCode settings
+scripts/
+  setup-tmux.sh               # tmux session setup (local / Docker)
+src/                          # Main source code
+tests/                        # Test files
+docs/                         # Documentation
+config.yaml                   # Experiment configuration
+pyproject.toml                # Python project metadata and dependencies
+package.json                  # Node.js dependencies (Claude Code)
+Makefile                      # Development commands
+.editorconfig                 # Editor formatting rules
+.mise.toml                    # Runtime versions (Python 3.11, Node 20)
 ```
 
 ## Development Commands
 
 ```bash
 # Code quality
-make check              # Run all checks (format + lint + typecheck)
+make check              # Run all checks (format + lint + typecheck + test)
 make format             # Format with black
 make lint               # Lint with ruff
+make lint-fix           # Lint and auto-fix with ruff
 make typecheck          # Type check with mypy
 make test               # Run pytest
 
 # Research workflow
-make run                # Run main experiment
+make run                # Run main experiment (ARGS="--config custom.yaml")
+
+# Utilities
+make help               # Display all make targets
+make clean              # Clean temporary files (tmp/)
+make clean-tmp          # Clean tmp/ directory
+make clean-out          # Clean out/ directory (with confirmation)
 ```
 
 ## Environment
 
 Prerequisites: make, Docker
 
-Two execution patterns are available. Each環境は独立しており、セットアップも別々。
+Two execution patterns are available. Each environment is independent with separate setup.
 
 ### Local environment
 ```bash
@@ -56,8 +80,9 @@ make tmux               # Start tmux + Claude Code session
 ### Docker environment
 ```bash
 make docker-up          # Start container (setup runs automatically)
+make docker-build       # Rebuild container (no cache)
 make tmux-docker        # Start tmux + Claude Code session (in Docker)
-make docker-shell       # Enter container shell
+make docker-shell       # Enter container shell (fish)
 make docker-down        # Stop container
 ```
 
@@ -77,6 +102,8 @@ This project supports Ralph for autonomous iterative development:
 ```bash
 make tmux               # Local: tmux + Claude Code
 make tmux-docker        # Docker: tmux + Claude Code
+make tmux-attach        # Attach to existing session
+make tmux-stop          # Stop session
 # Or use VSCode Task: "Start Research Session"
 ```
 
